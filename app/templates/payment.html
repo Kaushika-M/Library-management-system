@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+</head>
+
+<body>
+
+    <h1>Late Return Fine</h1>
+
+    <p>Your book was returned late.</p>
+
+    <h2>Fine: ₹{{ borrow.fine }}</h2>
+
+    <form action="/payment/{{ borrow.id }}" method="POST">
+        <button type="submit">
+            Pay ₹{{ borrow.fine }}
+        </button>
+    </form>
+
+</body>
+</html>

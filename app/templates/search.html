@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Books</title>
+    <link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+    <h1>Search Books</h1>
+
+    <form action="/search" method=POST>
+        <input type="text" name="title" placeholder="Enter book title">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if book %}
+        <h2>Results</h2>
+            <div>
+                <h3>{{ book.title }}</h3>
+                <p>Author: {{ book.author }}</p>
+                <p>Category: {{ book.category }}</p>
+                <p>Available: {{ book.available }}</p>
+            </div>
+        {%if book.available %}    
+        <form action="/issue" method=POST>
+            <input type="hidden" name="id" value="{{book.id}}">
+            <button type="submit">Issue Book</button>
+        </form>  
+        {%endif %}  
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books</title>
+    <link rel="stylesheet" href="/static/mybooks.css">
+</head>
+<body>
+   <h1>My Borrowed Books</h1>
+    {% if books %}
+
+    {% for item in books %}
+        <div>
+            <h2>{{ item.book.title }}</h2>
+
+            <p>Author: {{ item.book.author }}</p>
+            <p>Category: {{ item.book.category }}</p>
+
+            <p>
+                Borrowed:
+                {{ item.borrow.borrow_date }}
+            </p>
+
+            {% if item.borrow.return_date %}
+                <p>
+                    Returned:
+                    {{ item.borrow.return_date }}
+                </p>
+            {% else %}
+                <p>Not returned yet</p>
+
+                <form action="/return" method="post">
+                    <input
+                        type="hidden"
+                        name="book_id"
+                        value="{{ item.book.id }}"
+                    >
+
+                    <button type="submit">
+                        Return Book
+                    </button>
+                </form>
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>You haven't borrowed any books.</p>
+
+{% endif %}
+</body>
+</html>
